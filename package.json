@@ -4,8 +4,15 @@
   "description": "An shared todo app from crushing team task lists",
   "main": "server.js",
   "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/nodemon server.js"
+    "client": "cd client && npm run start",
+    "server": "./node_modules/.bin/nodemon --ignore 'client/*' server.js",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,8 +27,10 @@
   "dependencies": {
     "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "morgan": "^1.9.1",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.2",
