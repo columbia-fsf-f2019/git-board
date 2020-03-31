@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: []
-    };
-  }
+function App() {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
 
-  async componentDidMount() {
+  useEffect(async () => {
     const res = await fetch('/api/todos');
     const todos = await res.json();
     console.log(`[DEBUG] App(cDM) todos :: ${JSON.stringify(todos, null, 2)}`);
-    this.setState({ todos: todos });
+    setTodos(todos);
+  }, []);
+
+  useEffect(() => {
+    document.title = `Todolo${count}`;
+    document.addEventListener('keydown', handleBackTickKeyPress);
+
+    return () =>
+      document.removeEventListener('keydown', handleBackTickKeyPress);
+  }, [count]);
+
+  function handleBackTickKeyPress(evt) {
+    if (evt.key === '`') {
+      setCount(count + 1);
+    }
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Welcome to Todoloo!</h1>
-        <ul>
-          {this.state.todos.map((todo) => (
-            <li key={todo.id}>{todo.text}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>Welcome to Todoloo!</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App;
