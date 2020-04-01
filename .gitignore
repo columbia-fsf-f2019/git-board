@@ -5,4 +5,5 @@
 .vscode
 
 # project
+.env
 /node_modules
