@@ -1,4 +1,4 @@
-module.exports = model => ({
+module.exports = (model) => ({
   getAll: async (req, res) => {
     const result = await model.findAll();
     res.json(result);

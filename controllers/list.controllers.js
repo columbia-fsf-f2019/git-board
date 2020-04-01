@@ -1,5 +1,5 @@
 const db = require('../models');
-const crudControllers = require('../utils/crudControllers');
+const crudControllers = require('../utils/crud');
 
 const controllers = crudControllers(db.List);
 

@@ -18,7 +18,7 @@ app.get('/ping', (req, res) => {
   res.send({ message: 'pong' });
 });
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync();
 app.listen(process.env.PORT || 8080, () => {
   console.log(
     `[START] app running on http://localhost:${process.env.PORT || 8080}`
