@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.generateToken = function() {
     return jwt.sign(
       {
-        sub: this.id,
+        id: this.id,
         exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60
       },
       JWT_SECRET

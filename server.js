@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyparser = require('body-parser');
 
 const db = require('./models');
+const auth = require('./utils/auth');
 
 const app = express();
 
@@ -13,10 +14,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(require('./routes'));
-
-app.get('/ping', (req, res) => {
-  res.send({ message: 'pong' });
-});
+app.use(auth.handleErrors);
 
 db.sequelize.sync();
 app.listen(process.env.PORT || 8080, () => {
