@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const controllers = require('../../controllers/todo.controllers.js');
+const todoControllers = require('../../controllers/todo.controllers.js');
 
 router
   .route('/')
-  .get(controllers.getAll)
-  .post(controllers.create);
+  .get(todoControllers.getAll)
+  .post(todoControllers.create);
 
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.deleteOne);
+  .get(todoControllers.getOne)
+  .put(todoControllers.updateOne)
+  .delete(todoControllers.deleteOne);
 
 module.exports = router;

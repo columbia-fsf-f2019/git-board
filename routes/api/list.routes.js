@@ -1,20 +1,20 @@
 const router = require('express').Router();
-const controllers = require('../../controllers/list.controllers.js');
+const listControllers = require('../../controllers/list.controllers.js');
 
 router
   .route('/')
-  .get(controllers.getAll)
-  .post(controllers.create);
+  .get(listControllers.getAll)
+  .post(listControllers.create);
 
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.deleteOne);
+  .get(listControllers.getOne)
+  .put(listControllers.updateOne)
+  .delete(listControllers.deleteOne);
 
 router
   .route('/:id/todos')
-  .get(controllers.getTodos)
-  .post(controllers.addTodo);
+  .get(listControllers.getTodos)
+  .post(listControllers.addTodo);
 
 module.exports = router;
