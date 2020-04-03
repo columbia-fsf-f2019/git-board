@@ -45,9 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.List, { as: 'lists', through: 'list_members' });
   };
 
-  User.prototype.isPasswordCorrect = async function(password) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    return hashedPassword === this.password;
+  User.prototype.checkPassword = function(password) {
+    return bcrypt.compare(password, this.password);
   };
 
   User.prototype.generateToken = function() {

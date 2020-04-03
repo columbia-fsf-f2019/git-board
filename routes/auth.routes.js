@@ -8,15 +8,16 @@ router.get('/me', auth.required, (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  const user = await db.User.findOne({ where: { email: email } });
+  const { email: enteredEmail, password: enteredPassword } = req.body;
+  const user = await db.User.scope(null).findOne({ where: { email: enteredEmail } });
 
-  if (!user) res.status(400).json({ message: 'User not found' });
+  if (!user) return res.status(404).json({ message: 'User not found' });
 
-  if (!user.isPasswordCorrect(password))
-    res.status(400).json({ message: 'Incorrect password' });
+  const isPasswordCorrect = await user.checkPassword(enteredPassword);
+  if (!isPasswordCorrect)
+    return res.status(400).json({ message: 'Incorrect password' });
 
-  res.json({ token: user.generateToken() });
+  return res.json({ token: user.generateToken() });
 });
 
 module.exports = router;

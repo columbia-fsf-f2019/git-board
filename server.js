@@ -1,10 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
 const bodyparser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
+const morgan = require('morgan');
 
-const db = require('./models');
+require('dotenv').config()
 const auth = require('./utils/auth');
+const db = require('./models');
 
 const app = express();
 
