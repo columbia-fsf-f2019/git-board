@@ -1,7 +1,5 @@
 const jwtMiddleware = require('express-jwt');
 
-const { JWT_SECRET } = require('dotenv').config().parsed;
-
 function handleAuthErrors(err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({ message: 'Unauthorized' });
@@ -13,7 +11,7 @@ function handleAuthErrors(err, req, res, next) {
 module.exports = {
   handleErrors: handleAuthErrors,
   required: jwtMiddleware({
-    secret: JWT_SECRET,
+    secret: process.env.JWT_SECRET,
     requestProperty: 'auth.user'
   })
 };

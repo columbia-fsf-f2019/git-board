@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = require('dotenv').config().parsed;
-
 ('use strict');
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -55,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         id: this.id,
         exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60
       },
-      JWT_SECRET
+      process.env.JWT_SECRET
     );
   };
 
