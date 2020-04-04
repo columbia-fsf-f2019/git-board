@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Flex, NavLink } from 'theme-ui';
+import { Avatar, Box, Flex, NavLink } from 'theme-ui';
 
-function Navbar() {
+import { useAuth } from '../contexts/auth.context';
+
+function AuthenticatedNavbar() {
+  const { user, logout } = useAuth();
+  console.log(user);
+  const firstInitial = user.email[0].toUpperCase();
   return (
     <Flex
       as="nav"
@@ -44,25 +49,25 @@ function Navbar() {
           </Link>
         </Flex>
       </Flex>
-      <Box>
-        <Link to="login">
-          <NavLink
-            as="span"
-            sx={{
-              color: 'primary',
-              mr: '15px',
-              ':hover': { textDecoration: 'underline' },
-            }}
-          >
-            Login
-          </NavLink>
+      <Flex sx={{ alignItems: 'center' }}>
+        <NavLink
+          sx={{
+            color: 'primary',
+            mr: '15px',
+            ':hover': { textDecoration: 'underline' },
+          }}
+          onClick={logout}
+        >
+          Logout
+        </NavLink>
+        <Link to="/">
+          <Avatar
+            src={`https://contrast.now.sh/fff/30c?text=${firstInitial}&size=96&fontSize=1.5&baseline=1`}
+          />
         </Link>
-        <Link to="signup">
-          <Button>Sign up</Button>
-        </Link>
-      </Box>
+      </Flex>
     </Flex>
   );
 }
 
-export default Navbar;
+export default AuthenticatedNavbar;

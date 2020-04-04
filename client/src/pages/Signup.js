@@ -6,13 +6,13 @@ function Signup() {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
     onSubmit: (values) => {
       console.log(
         `[DEBUG] Signup(onSubmit) form values :: ${JSON.stringify(values)}`
       );
-    }
+    },
   });
 
   return (
@@ -23,13 +23,13 @@ function Signup() {
         width: '100vw',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
       <Card px="75px" py="100px">
         <Flex
           sx={{
-            flexDirection: 'column'
+            flexDirection: 'column',
           }}
         >
           <Styled.h1>Sign up</Styled.h1>
@@ -52,7 +52,7 @@ function Signup() {
               value={formik.values.password}
               mb="30px"
             />
-            <Button type="submit" sx={{width: "100%"}}>
+            <Button type="submit" sx={{ width: '100%', bg: 'secondary' }}>
               Sign up
             </Button>
           </Box>

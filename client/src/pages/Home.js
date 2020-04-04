@@ -10,7 +10,7 @@ function Home() {
         width: '100vw',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
       <Styled.h2>Home</Styled.h2>
