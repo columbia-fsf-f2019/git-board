@@ -15,10 +15,10 @@ function AuthProvider(props) {
       setIsLoading(true);
       apiClient.auth
         .login(creds)
-        .then(({ data }) => {
+        .then((user) => {
           setIsLoading(false);
           setIsSuccess(true);
-          setUser(data.user || null);
+          setUser(user || null);
         })
         .catch(() => setIsLoading(false));
     },
