@@ -37,7 +37,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.3",
-    "sequelize": "^5.21.6",
+    "sequelize": "^5.21.8",
     "sequelize-cli": "^5.5.1"
   }
 }
